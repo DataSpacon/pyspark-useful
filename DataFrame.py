@@ -1,5 +1,8 @@
+# Make a list of columns to drop 
+cols_to_drop = ['FundingType', 'EstOutcome', 'PostYear', 'PostMonth']
 
-
+# Drop the columns 
+MatterMain_ToJoin4_7_2 = MatterMain_ToJoin4_7_2.drop(*cols_to_drop) 
 
 
 #### Filter
