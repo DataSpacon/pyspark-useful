@@ -16,3 +16,5 @@ MatterMain_ToJoin4_7_3= MatterMain_ToJoin4_7_2.filter(~MatterMain_ToJoin4_7_2.Ma
 #########################################################    
 .filter((pf.col('Invoice_Sum (ThisMonth)')<250000) &\
 #########################################################
+        
+Stages_Nulls_count_After_FF =  MatterMain_010_3.filter(MatterMain_010_3.StageID.isNull()).count()
