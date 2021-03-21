@@ -42,3 +42,23 @@ for i in ["Income","No_of_Days"]:
 
 print("After Scaling :")
 df.show(5)
+
+
+# 3 keeping the same column name
+
+
+# Iterating over columns to be scaled
+for i in ["Client_Age","WIP_Sum (ThisMonth)"]:
+    # VectorAssembler Transformation - Converting column to vector type
+    assembler = VectorAssembler(inputCols=[i],outputCol=i+"_Vect")
+
+    # MinMaxScaler Transformation
+    scaler = MinMaxScaler(inputCol=i+"_Vect", outputCol=i+"_Scaled")
+
+    # Pipeline of VectorAssembler and MinMaxScaler
+    pipeline = Pipeline(stages=[assembler, scaler])
+
+    # Fitting pipeline on dataframe
+    MatterMain_Nulls_4 = pipeline.fit(MatterMain_Nulls_4).transform(MatterMain_Nulls_4)\
+                        .withColumn(i+"_Scaled", unlist(i+"_Scaled")).drop(*[i,i+"_Vect"])
+    MatterMain_Nulls_4=MatterMain_Nulls_4.withColumnRenamed(i+"_Scaled",i)
