@@ -18,3 +18,11 @@ MatterMain_ToJoin4_7_3= MatterMain_ToJoin4_7_2.filter(~MatterMain_ToJoin4_7_2.Ma
 #########################################################
         
 Stages_Nulls_count_After_FF =  MatterMain_010_3.filter(MatterMain_010_3.StageID.isNull()).count()
+        
+# change the columns type       
+ changedTypedf = joindf.withColumn("label", joindf["show"].cast(DoubleType()))
+ changedTypedf = joindf.withColumn("label", joindf["show"].cast("double"))
+ 
+ StringType
+ 
+ changedTypedf = joindf.withColumn("show", col("show").cast("double"))
