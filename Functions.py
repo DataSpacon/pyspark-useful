@@ -17,3 +17,6 @@ sub = (
     .withColumn("Median", median_udf("Prices"))
     .drop("Prices")
 )
+
+# Clean some column names. Left is pandas, some change required for pyspark
+housing.columns = [x.lower().replace(".","").replace(" ", "_") for x in housing.columns]
