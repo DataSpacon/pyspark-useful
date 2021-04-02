@@ -26,3 +26,35 @@ Stages_Nulls_count_After_FF =  MatterMain_010_3.filter(MatterMain_010_3.StageID.
  StringType
  
  changedTypedf = joindf.withColumn("show", col("show").cast("double"))
+
+        
+#### Append data frames:
+columns = ['Variable', 'Correlation']
+vals = [('',0.000)]
+
+correlations_0 = spark.createDataFrame(vals, columns)
+        
+        
+### Order
+        from pyspark.sql.functions import desc
+
+(group_by_dataframe
+    .count()
+    .filter("`count` >= 10")
+    .sort(desc("count"))
+ 
+ from pyspark.sql.functions import desc
+
+(group_by_dataframe
+    .count()
+    .filter("`count` >= 10")
+    .sort(desc("count"))
+ 
+ correlations_0.orderBy('Correlation', ascending=False).take(10)
+ 
+ 
+
+for i in numeric_variables:
+    newRow = spark.createDataFrame([(i,MatterMain_model_train_lin_reg_1.stat.corr('Invoice_Sum (NextMonth)',i))]\
+                                   , columns)
+    correlations_0 = correlations_0.union(newRow)
